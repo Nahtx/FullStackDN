@@ -1,0 +1,12 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    Note right of browser: uyżytkownik wpisuje treść notatki i klika przycisk Save
+    Note right of browser: Kod w spa.js przechwytuje formularz, dodaje notatkę do listy i odświeża widok na stronie
+
+    browser->>server: POST /new_note_spa (dane nowej notatki w formacie JSON)
+    activate server
+    Note over server: Serwer zapisuje nową notatkę
+    server-->>browser: Kod 201 Created {"message":"note created"}
+    deactivate server
