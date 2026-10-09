@@ -1,0 +1,33 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    browser->>server: POST /new_note (tresc nowej notatki)
+    activate server
+    Note over server: serwer zapisuje nowa notatke w bazie / pamieci
+    server-->>browser: Kod 302 (Przekierowanie na adres /notes)
+    deactivate server
+
+    browser->>server: GET /notes (żądanie strony z notatkami)
+    activate server
+    server-->>browser: dokument HTML
+    deactivate server
+
+    browser->>server: GET /main.css (żądanie stylów)
+    activate server
+    server-->>browser: plik CSS ze stylami
+    deactivate server
+
+    browser->>server: GET /main.js (żądanie skryptu)
+    activate server
+    server-->>browser: plik javascript
+    deactivate server
+
+    Note right of browser: Przeglądarka uruchamia kod javascript, który zleca pobranie danych JSON
+
+    browser->>server: GET /data.json (żądanie listy notatek)
+    activate server
+    server-->>browser: lista notatek w formacie JSON (w tym nowo dodana)
+    deactivate server
+
+    Note right of browser: przeglądarka wykonuje funkcję renderującą i wyświetla notatki na ekranie
