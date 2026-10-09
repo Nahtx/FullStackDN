@@ -1,0 +1,27 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    browser->>server: GET /spa (żądanie dokumentu HTML)
+    activate server
+    server-->>browser: dokument HTML
+    deactivate server
+
+    browser->>server: GET /main.css (żądanie arkusza stylów)
+    activate server
+    server-->>browser: plik CSS
+    deactivate server
+
+    browser->>server: GET /spa.js (żądanie pliku JavaScript)
+    activate server
+    server-->>browser: plik JavaScript (spa.js)
+    deactivate server
+
+    Note right of browser: przefglądarka uruchamia kod w spa.js, który wykonuje zapytanie XHR/AJAX po dane JSON
+
+    browser->>server: GET /data.json (żądanie danych z notatkami)
+    activate server
+    server-->>browser: nbotatki w formacie JSON
+    deactivate server
+
+    Note right of browser: przeglądarka wykonuje funkcję obsługującą odpowiedź i wyrenderuje notatki na stronie
